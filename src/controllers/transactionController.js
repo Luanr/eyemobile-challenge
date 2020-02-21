@@ -2,8 +2,8 @@ import Transaction from '../models/transaction';
 
 const getTransactions = (req, res, next) => {
     try {
-
-    } catch(e) {
+        res.send();
+    } catch(error) {
         next(error);
     }
 };
@@ -11,15 +11,15 @@ const getTransactions = (req, res, next) => {
 const getBalance = (req, res, next) => {
     try {
 
-    } catch(e) {
+    } catch(error) {
         next(error);
     }
 };
 
 const sendTransaction = (req, res, next) => {
     try {
-
-    } catch(e) {
+        const transaction = new Transaction(req.body);
+    } catch(error) {
         next(error);
     }
 }

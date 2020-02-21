@@ -1,14 +1,37 @@
-import {Sequelize, Model, DataTypes} from 'sequelize';
+import {Model, DataTypes} from 'sequelize';
+import sequelize from '../database';
 
 class Transaction extends Model {}
 
 Transaction.init({
-    nsu:        DataTypes.STRING,
-    valor:      DataTypes.FLOAT,
-    bandeira:   DataTypes.FLOAT,
-    modalidade: DataTypes.STRING,
-    horario:    DataTypes.DATE,
-    disponivel: DataTypes.DATE
+    nsu: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    valor: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    bandeira: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    modalidade: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    horario: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    disponivel: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
 }, {sequelize, modelName: 'transaction'});
+
+const createTransaction = (... params) => {
+
+}
 
 export default Transaction;
