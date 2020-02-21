@@ -4,6 +4,7 @@ import routes from './routes';
 const app = express();
 const PORT = 3000;
 
+app.use(basicAuth({users: {'': ''}}));
 routes(app);
 
 const initServer = () => {
