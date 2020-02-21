@@ -14,7 +14,9 @@
     "babel-core": "^6.26.3",
     "babel-node": "0.0.1-security",
     "babel-preset-env": "^1.7.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
     "sequelize": "^5.21.4"
   },
   "devDependencies": {
