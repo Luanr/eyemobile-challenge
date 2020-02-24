@@ -1,7 +1,14 @@
-import {Model, DataTypes} from 'sequelize';
-import sequelize from '../database';
+'use strict';
 
-const Transaction = sequelize.define('Transaction', {
+module.exports = {
+  up: (queryInterface, DataTypes) => {
+    return queryInterface.createTable('Transactions', {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+      },
       nsu: {
         type: DataTypes.STRING,
         allowNull: false
@@ -26,20 +33,10 @@ const Transaction = sequelize.define('Transaction', {
           type: DataTypes.DATE,
           allowNull: false
       },
-});
+    });
+  },
 
-const createTransaction = (... params) => {
-    const {nsu, valor, bandeira, modalidade, horario} = params;
-
-    try {
-
-    } catch(e) {
-
-    }
-}
-
-const calculateBalance = () => {
-    return {"receber": 1.0, "disponivel": 2.0};
-}
-
-export default {Transaction, calculateBalance, createTransaction};
+  down: (queryInterface, Sequelize) => {
+      return queryInterface.dropTable('Transactions');
+  }
+};

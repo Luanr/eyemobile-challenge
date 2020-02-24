@@ -2,11 +2,15 @@ import express from 'express';
 import basicAuth from 'express-basic-auth';
 import routes from './routes';
 import sequelize from './database';
+import bodyParser from 'body-parser';
 
 const app = express();
 const PORT = 3000;
 
-app.use(basicAuth({users: {'': ''}}));
+//app.use(basicAuth({users: {'': ''}}));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 routes(app);
 
 const initServer = () => {

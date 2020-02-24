@@ -12,10 +12,10 @@ services:
   db:
     image: postgres
     restart: always
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+#    volumes:
+#      - ./folder/1.sql:/docker-entrypoint-initdb.d/1.sql
     environment:
-      POSTGRES_DATABASE: ${DB_NAME}
+      POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
 
