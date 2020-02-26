@@ -20,6 +20,7 @@ const initServer = () => {
 const checkDb = async () => {
     try {
         await sequelize.authenticate();
+        await sequelize.sync({ force: true });
         console.log('Connection sucessfully!');
     } catch(error) {
         console.log(error);

@@ -1,10 +1,11 @@
-import Transaction from '../models/transaction';
+import * as Transaction from '../models/transaction';
 
-const getTransactions = (req, res) => {
+const getTransactions = async (req, res) => {
     try {
-        res.send();
+        let result = await Transaction.getTransactions();
+        res.json(result);
     } catch(error) {
-        res.status(500).send('Error!')
+        res.status(500).send('Error!'+ error);
     }
 };
 
@@ -12,16 +13,17 @@ const getBalance = async (req, res) => {
     try {
         res.json(Transaction.calculateBalance());
     } catch(error) {
-        res.status(500).send('Error!')
+        res.status(500).send('Error!'+ error);
     }
 };
 
-const sendTransaction = (req, res) => {
+const sendTransaction = async (req, res) => {
     try {
-        const rawTransaction = Transaction.createTransaction(JSON.parse(req.body));
-        res.status(200).end();
+        Transaction.createTransaction(req.query);
+        console.log(req.query);
+        res.json('Sucess!');
     } catch(error) {
-        res.status(500).send('Error!')
+        res.status(500).send('Error!'+ error);
     }
 }
 
