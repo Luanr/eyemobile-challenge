@@ -49,10 +49,10 @@ export const dateToString = (date) => {
 
 export const getLiquidValue = (paymentType, total) => {
     if(paymentType == 'credito') {
-        let liquid = total * 0.02;
+        let liquid = total * (1 - 0.02);
         return liquid.toFixed(2);
     } else if (paymentType == 'debito') {
-        let liquid = total * 0.03;
+        let liquid = total * (1 - 0.03);
         return liquid.toFixed(2);
     }
     throw new Error('Invalid payment type!');
