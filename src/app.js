@@ -1,5 +1,4 @@
 import express from 'express';
-import basicAuth from 'express-basic-auth';
 import routes from './routes';
 import sequelize from './database';
 import bodyParser from 'body-parser';
