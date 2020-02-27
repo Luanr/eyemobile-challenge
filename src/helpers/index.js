@@ -11,33 +11,49 @@ export const floatValue = (input) => {
 
 export const validateTransaction = [
     check('nsu').not().isEmpty(),
-    check('valor').not().isEmpty(),
+    check('valor').isFloat().not().isEmpty(),
     check('bandeira').not().isEmpty(),
     check('modalidade').not().isEmpty(),
-    check('horario').not().isEmpty()
+    check('horario').isISO8601().not().isEmpty()
 ];
 
-export const getPaymentDate = (paymentType, transactionDate) => {
-    let date = new Date(transactionDate);
-    if(paymentType == 'credito') {
-        return '2019-01-07';
-    } else if (paymentType == 'debito') {
-        return '2019-01-07';
+export const getAvailableDate = (paymentType, transactionDate) => {
+    try {
+        let date = new Date(transactionDate);
+        let offset, newDate;
+
+        if(paymentType == 'credito') {
+            date = new Date(date.getTime() + 30 * 24 * 3600 * 1000);
+        }
+
+        switch (date.getDate) {
+            case 4: // friday
+                offset = 3;
+                break;
+            case 5: // saturday
+                offset = 2;
+                break;
+            default:
+                offset = 1;
+        }
+        newDate = new Date(date.getTime() + offset * 24 * 3600 * 1000);
+        return dateToString(newDate);
+    } catch(error) {
+        throw new Error(error);
     }
-    throw new Error('Invalid payment type!');
 }
 
-
+export const dateToString = (date) => {
+    return date.toISOString().split('T')[0];
+}
 
 export const getLiquidValue = (paymentType, total) => {
     if(paymentType == 'credito') {
-        return total * 0.02;
+        let liquid = total * 0.02;
+        return liquid.toFixed(2);
     } else if (paymentType == 'debito') {
-        return total * 0.03;
+        let liquid = total * 0.03;
+        return liquid.toFixed(2);
     }
     throw new Error('Invalid payment type!');
-}
-
-export const getAvailableDate = () => {
-
 }

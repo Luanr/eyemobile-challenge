@@ -29,13 +29,13 @@ const sendTransaction = async (req, res) => {
         return res.status(405).json({ errors: errors.array() });
     }
 
+    const {nsu, valor, bandeira, modalidade, horario} = req.query;
+
+    const floatValor = parseFloat(valor).toFixed(2);
+    const liquid = getLiquidValue(modalidade, floatValor);
+    const availableDate = getAvailableDate(modalidade, horario);
+    
     try {
-        const {nsu, valor, bandeira, modalidade, horario} = req.query;
-
-        const floatValor = parseFloat(valor);
-        const liquid = getLiquidValue(modalidade, floatValor);
-        const paymentDate = getPaymentDate(modalidade, horario);
-
         const creation = await Transaction.create({
             nsu: nsu,
             valor: floatValor,
@@ -43,7 +43,7 @@ const sendTransaction = async (req, res) => {
             modalidade: modalidade,
             horario: horario,
             liquido: liquid,
-            disponivel: paymentDate
+            disponivel: availableDate
         });
 
         res.json('sucess');
