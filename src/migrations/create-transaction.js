@@ -10,6 +10,7 @@ module.exports = {
         allowNull: false
       },
       nsu: {
+        unique: true,
         type: DataTypes.STRING,
         isNumeric: true,
         notEmpty: true,
