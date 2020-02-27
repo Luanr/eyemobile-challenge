@@ -1,10 +1,10 @@
 import controller from './controllers/transactionController';
 import {validateTransaction} from './helpers';
-import {check} from 'express-validator';
+import * as Auth from './auth';
 
 const routes = (instance) => {
     instance.get('/transactions', controller.getTransactions);
-    instance.get('/balance', controller.getBalance);
+    instance.get('/balance', Auth.authPortal, controller.getBalance);
     instance.post('/transaction/send',  validateTransaction, controller.sendTransaction);
 };
 
