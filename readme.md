@@ -4,6 +4,17 @@ Eyemobile challenge API.
 
 ## Getting started
 
+You must setup .env file:
+
+On linux:
+
+    echo "DB_HOST=db\nDB_NAME=eyemobileapi\nDB_USER=postgresql\nDB_PASS=postgresql" > .env
+
+Or Windows:
+
+    echo DB_HOST=db&echo.DB_NAME=eyemobileapi&echo.DB_USER=postgresql&echo.DB_PASS=postgresql > .env
+
+
 For deploying the server you must have **docker** and **docker-compose** installed.
 
     docker-compose build && docker-compose run

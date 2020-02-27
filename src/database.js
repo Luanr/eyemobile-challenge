@@ -8,11 +8,4 @@ const sequelize = new Sequelize('eyemobileapi', process.env.DB_USER, process.env
     dialect: 'postgres'
 })
 
-const createDb = async () => {
-    try {
-        await sequelize.query(`CREATE DATABASE eyemobileapi;`);
-    } catch(e) {
-    }
-};
-
 export default sequelize;
