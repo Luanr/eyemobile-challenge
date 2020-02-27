@@ -1,7 +1,7 @@
 import {Transaction} from '../models/transaction';
-import {getPaymentDate, getLiquidValue, getAvailableDate} from '../helpers';
+import {getLiquidValue, getAvailableDate, dateToString} from '../helpers';
 import {validationResult} from 'express-validator';
-import {Sequelize} from 'sequelize';
+import {Op, Sequelize} from 'sequelize';
 
 const getTransactions = async (req, res) => {
     try {
@@ -16,7 +16,10 @@ const getTransactions = async (req, res) => {
 
 const getBalance = async (req, res) => {
     try {
-        res.json({"receber": 1.0, "disponivel": 2.0});
+        let todayStr = dateToString(new Date());
+        let toReceive = await Transaction.sum('liquido', {  where: {    disponivel: {   [Op.gt]: todayStr}   } });
+        let available = await Transaction.sum('liquido', {  where: {    disponivel: {   [Op.lte]: todayStr}   } });;
+        res.json({"receber": toReceive, "disponivel": available});
     } catch(error) {
         res.status(500).send('Error!'+ error);
     }
